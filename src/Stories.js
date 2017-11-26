@@ -1,7 +1,5 @@
 var React = require('react')
 
-var createReactClass = require('create-react-class');
-
 var StoryStore = require('./stores/StoryStore')
 
 var PageNumberMixin = require('./mixins/PageNumberMixin')
@@ -14,8 +12,7 @@ var {ITEMS_PER_PAGE} = require('./utils/constants')
 var pageCalc = require('./utils/pageCalc')
 var setTitle = require('./utils/setTitle')
 
-var Stories = createReactClass({
-  displayName: 'Stories',
+var Stories = React.createClass({
   mixins: [PageNumberMixin],
 
   propTypes: {
@@ -106,7 +103,7 @@ var Stories = createReactClass({
       }
     }
     return rendered
-  },
+  }
 })
 
 module.exports = Stories
