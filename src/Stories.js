@@ -2,7 +2,6 @@ var React = require('react')
 
 var StoryStore = require('./stores/StoryStore')
 
-var PageNumberMixin = require('./mixins/PageNumberMixin')
 var Paginator = require('./Paginator')
 var Spinner = require('./Spinner')
 var StoryListItem = require('./StoryListItem')
@@ -10,12 +9,11 @@ var SettingsStore = require('./stores/SettingsStore')
 
 var {ITEMS_PER_PAGE} = require('./utils/constants')
 var pageCalc = require('./utils/pageCalc')
+var getPageNumber = require('./utils/getPageNumber')
 var setTitle = require('./utils/setTitle')
 
-var Stories = React.createClass({
-  mixins: [PageNumberMixin],
-
-  propTypes: {
+class Stories extends React.Component {
+  static propTypes = {
     // The number of stories which may be paginated through
     limit: React.PropTypes.number.isRequired,
     // The route name being used
@@ -25,15 +23,13 @@ var Stories = React.createClass({
 
     // Page title associated with the stories being displayed
     title: React.PropTypes.string
-  },
+  };
 
-  getInitialState() {
-    return {
-      ids: [],
-      limit: this.props.limit,
-      stories: []
-    }
-  },
+  state = {
+    ids: [],
+    limit: this.props.limit,
+    stories: []
+  };
 
   componentDidMount() {
     setTitle(this.props.title)
@@ -41,15 +37,16 @@ var Stories = React.createClass({
     this.store.addListener('update', this.handleUpdate)
     this.store.start()
     this.setState(this.store.getState())
-  },
+  }
 
   componentWillUnmount() {
     this.store.removeListener('update', this.handleUpdate)
     this.store.stop()
     this.store = null
-  },
+  }
 
-  handleUpdate(update) {
+  handleUpdate = (update) => {
+    /*
     if (!this.isMounted()) {
       if (process.env.NODE_ENV !== 'production') {
         console.warn(
@@ -58,16 +55,18 @@ var Stories = React.createClass({
       }
       return
     }
+    */
     update.limit = update.ids.length
     this.setState(update)
-  },
+  };
 
   render() {
-    var page = pageCalc(this.getPageNumber(), ITEMS_PER_PAGE, this.state.limit)
+    var pageNumber = getPageNumber(this.props.location.page)
+    var page = pageCalc(pageNumber, ITEMS_PER_PAGE, this.state.limit)
 
     // Display a list of placeholder items while we're waiting for the initial
     // list of story ids to load from Firebase.
-    if (this.state.stories.length === 0 && this.state.ids.length === 0 && this.getPageNumber() > 0) {
+    if (this.state.stories.length === 0 && this.state.ids.length === 0 && getPageNumber(pageNumber) > 0) {
       var dummyItems = []
       for (var i = page.startIndex; i < page.endIndex; i++) {
         dummyItems.push(
@@ -88,9 +87,9 @@ var Stories = React.createClass({
       </ol>
       <Paginator route={this.props.route} page={page.pageNum} hasNext={page.hasNext}/>
     </div>
-  },
+  }
 
-  renderItems(startIndex, endIndex) {
+  renderItems = (startIndex, endIndex) => {
     var rendered = []
     for (var i = startIndex; i < endIndex; i++) {
       var item = this.state.stories[i]
@@ -103,7 +102,7 @@ var Stories = React.createClass({
       }
     }
     return rendered
-  }
-})
+  };
+}
 
 module.exports = Stories
