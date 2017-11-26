@@ -10,19 +10,19 @@ var Stories = require('./Stories')
 var Updates = require('./Updates')
 
 function stories(route, type, limit, title) {
-  return React.createClass({
+  return class extends React.Component {
     render() {
       return <Stories {...this.props} key={route} route={route} type={type} limit={limit} title={title}/>
     }
-  })
+  };
 }
 
 function updates(type) {
-  return React.createClass({
+  return class extends React.Component {
     render() {
       return <Updates {...this.props} key={type} type={type}/>
     }
-  })
+  };
 }
 
 var Ask = stories('ask', 'askstories', 200, 'Ask')

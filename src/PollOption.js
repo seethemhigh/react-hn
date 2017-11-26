@@ -1,4 +1,5 @@
 var React = require('react')
+var createReactClass = require('create-react-class');
 var ReactFireMixin = require('reactfire')
 
 var HNService = require('./services/HNService')
@@ -7,7 +8,8 @@ var Spinner = require('./Spinner')
 
 var pluralise = require('./utils/pluralise')
 
-var PollOption = React.createClass({
+var PollOption = createReactClass({
+  displayName: 'PollOption',
   mixins: [ReactFireMixin],
 
   getInitialState() {
@@ -29,7 +31,7 @@ var PollOption = React.createClass({
         {pollopt.score} point{pluralise(pollopt.score)}
       </div>
     </div>
-  }
+  },
 })
 
 module.exports = PollOption

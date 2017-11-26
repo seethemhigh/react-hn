@@ -1,4 +1,5 @@
 var React = require('react')
+var createReactClass = require('create-react-class');
 var ReactFireMixin = require('reactfire')
 
 var CommentThreadStore = require('./stores/CommentThreadStore')
@@ -13,7 +14,8 @@ var cx = require('./utils/buildClassName')
 /**
  * A comment in a thread.
  */
-var Comment = React.createClass({
+var Comment = createReactClass({
+  displayName: 'Comment',
   mixins: [CommentMixin, ReactFireMixin],
 
   propTypes: {
@@ -183,7 +185,7 @@ var Comment = React.createClass({
         })}
       </div>}
     </div>
-  }
+  },
 })
 
 module.exports = Comment

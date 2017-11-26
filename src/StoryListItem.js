@@ -1,4 +1,5 @@
 var React = require('react')
+var createReactClass = require('create-react-class');
 var ReactFireMixin = require('reactfire')
 
 var StoryCommentThreadStore = require('./stores/StoryCommentThreadStore')
@@ -17,7 +18,8 @@ var Spinner = require('./Spinner')
  * responsible for listening to updates to the story and providing the latest
  * version for StoryStore's cache.
  */
-var StoryListItem = React.createClass({
+var StoryListItem = createReactClass({
+  displayName: 'StoryListItem',
   mixins: [ItemMixin, ListItemMixin, ReactFireMixin],
 
   propTypes: {
@@ -129,7 +131,7 @@ var StoryListItem = React.createClass({
     }
 
     return this.renderListItem(this.state.item, this.threadState)
-  }
+  },
 })
 
 module.exports = StoryListItem

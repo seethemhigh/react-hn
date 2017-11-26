@@ -1,5 +1,7 @@
 var React = require('react')
 
+var createReactClass = require('create-react-class');
+
 var SettingsStore = require('./stores/SettingsStore')
 var UpdatesStore = require('./stores/UpdatesStore')
 
@@ -28,7 +30,8 @@ function filterUpdates(updates) {
   return updates
 }
 
-var Updates = React.createClass({
+var Updates = createReactClass({
+  displayName: 'Updates',
   mixins: [PageNumberMixin],
 
   getInitialState() {
@@ -92,7 +95,7 @@ var Updates = React.createClass({
         <Paginator route="newest" page={page.pageNum} hasNext={page.hasNext}/>
       </div>
     }
-  }
+  },
 })
 
 module.exports = Updates

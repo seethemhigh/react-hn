@@ -1,4 +1,5 @@
 var React = require('react')
+var createReactClass = require('create-react-class');
 var ReactFireMixin = require('reactfire')
 var TimeAgo = require('react-timeago').default
 
@@ -12,8 +13,10 @@ var setTitle = require('./utils/setTitle')
 
 // TODO User comments
 
-var UserProfile = React.createClass({
+var UserProfile = createReactClass({
+  displayName: 'UserProfile',
   mixins: [ReactFireMixin],
+
   getInitialState() {
     return {user: {}}
   },
@@ -57,7 +60,7 @@ var UserProfile = React.createClass({
         {user.about && <dd><div className="UserProfile__about" dangerouslySetInnerHTML={{__html: user.about}}/></dd>}
       </dl>
     </div>
-  }
+  },
 })
 
 module.exports = UserProfile

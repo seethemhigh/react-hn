@@ -1,9 +1,9 @@
 var React = require('react')
 
-var NotFound = React.createClass({
+class NotFound extends React.Component {
   render() {
     return <h2>Not found</h2>
   }
-})
+}
 
 module.exports = NotFound

@@ -1,4 +1,5 @@
 var React = require('react')
+var createReactClass = require('create-react-class');
 var ReactFireMixin = require('reactfire')
 var TimeAgo = require('react-timeago').default
 
@@ -24,7 +25,8 @@ function timeUnitsAgo(value, unit, suffix) {
   return `${value} ${unit}s`
 }
 
-var Item = React.createClass({
+var Item = createReactClass({
+  displayName: 'Item',
   mixins: [ItemMixin, ReactFireMixin],
 
   getInitialState() {
@@ -181,7 +183,7 @@ var Item = React.createClass({
         })}
       </div>}
     </div>
-  }
+  },
 })
 
 module.exports = Item

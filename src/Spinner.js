@@ -2,10 +2,8 @@ var React = require('react')
 
 // TODO Implement GIF-based fallback for IE9 and another non-animating browsers
 //      See https://github.com/tobiasahlin/SpinKit for how-to
-var Spinner = React.createClass({
-  getDefaultProps() {
-    return {size: 6, spacing: 2}
-  },
+class Spinner extends React.Component {
+  static defaultProps = {size: 6, spacing: 2};
 
   render() {
     var bounceSize = this.props.size + 'px'
@@ -16,6 +14,6 @@ var Spinner = React.createClass({
       <div className="bounce3" style={bounceStyle}/>
     </div>
   }
-})
+}
 
 module.exports = Spinner

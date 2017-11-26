@@ -1,4 +1,5 @@
 var React = require('react')
+var createReactClass = require('create-react-class');
 var ReactFireMixin = require('reactfire')
 var withRouter = require('react-router/lib/withRouter')
 
@@ -14,7 +15,8 @@ var CommentMixin = require('./mixins/CommentMixin')
 var cx = require('./utils/buildClassName')
 var setTitle = require('./utils/setTitle')
 
-var PermalinkedComment = React.createClass({
+var PermalinkedComment = createReactClass({
+  displayName: 'PermalinkedComment',
   mixins: [CommentMixin, ReactFireMixin],
 
   getDefaultProps() {
@@ -146,7 +148,7 @@ var PermalinkedComment = React.createClass({
         })}
       </div>}
     </div>
-  }
+  },
 })
 
 module.exports = withRouter(PermalinkedComment)

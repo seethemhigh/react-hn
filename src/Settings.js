@@ -2,12 +2,12 @@ var React = require('react')
 
 var SettingsStore = require('./stores/SettingsStore')
 
-var Settings = React.createClass({
+class Settings extends React.Component {
   componentDidMount() {
     this.refs.container.focus()
-  },
+  }
 
-  onChange(e) {
+  onChange = (e) => {
     var el = e.target
     if (el.type === 'checkbox') {
       SettingsStore[el.name] = el.checked
@@ -17,11 +17,11 @@ var Settings = React.createClass({
     }
     this.forceUpdate()
     SettingsStore.save()
-  },
+  };
 
-  onClick(e) {
+  onClick = (e) => {
     e.stopPropagation()
-  },
+  };
 
   render() {
     return <div ref="container" className="Settings" tabIndex="-1" onClick={this.onClick}>
@@ -73,6 +73,6 @@ var Settings = React.createClass({
       </form>
     </div>
   }
-})
+}
 
 module.exports = Settings

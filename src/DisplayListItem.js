@@ -1,5 +1,7 @@
 var React = require('react')
 
+var createReactClass = require('create-react-class');
+
 var StoryCommentThreadStore = require('./stores/StoryCommentThreadStore')
 
 var ItemMixin = require('./mixins/ItemMixin')
@@ -9,7 +11,8 @@ var ListItemMixin = require('./mixins/ListItemMixin')
  * Display story title and metadata as a list item.
  * The story to display will be passed as a prop.
  */
-var DisplayListItem = React.createClass({
+var DisplayListItem = createReactClass({
+  displayName: 'DisplayListItem',
   mixins: [ItemMixin, ListItemMixin],
 
   propTypes: {
@@ -22,7 +25,7 @@ var DisplayListItem = React.createClass({
 
   render() {
     return this.renderListItem(this.props.item, this.threadState)
-  }
+  },
 })
 
 module.exports = DisplayListItem

@@ -1,10 +1,10 @@
 var React = require('react')
 var Link = require('react-router/lib/Link')
 
-var Paginator = React.createClass({
-  _onClick(e) {
+class Paginator extends React.Component {
+  _onClick = (e) => {
     setTimeout(function() { window.scrollTo(0, 0) }, 0)
-  },
+  };
 
   render() {
     if (this.props.page === 1 && !this.props.hasNext) { return null }
@@ -18,6 +18,6 @@ var Paginator = React.createClass({
       </span>}
     </div>
   }
-})
+}
 
 module.exports = Paginator

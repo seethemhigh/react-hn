@@ -7,14 +7,12 @@ var StoryStore = require('./stores/StoryStore')
 var UpdatesStore = require('./stores/UpdatesStore')
 var SettingsStore = require('./stores/SettingsStore')
 
-var App = React.createClass({
-  getInitialState() {
-    return {
-      showSettings: false,
-      showChildren: false,
-      prebootHTML: this.props.params.prebootHTML
-    }
-  },
+class App extends React.Component {
+  state = {
+    showSettings: false,
+    showChildren: false,
+    prebootHTML: this.props.params.prebootHTML
+  };
 
   componentWillMount() {
     SettingsStore.load()
@@ -22,31 +20,31 @@ var App = React.createClass({
     UpdatesStore.loadSession()
     if (typeof window === 'undefined') return
     window.addEventListener('beforeunload', this.handleBeforeUnload)
-  },
+  }
 
   componentDidMount() {
     // Empty the prebooted HTML and hydrate using live results from Firebase
     this.setState({ prebootHTML: '', showChildren: true })
-  },
+  }
 
   componentWillUnmount() {
     if (typeof window === 'undefined') return
     window.removeEventListener('beforeunload', this.handleBeforeUnload)
-  },
+  }
 
   /**
    * Give stores a chance to persist data to sessionStorage in case this is a
    * refresh or an external link in the same tab.
    */
-  handleBeforeUnload() {
+  handleBeforeUnload = () => {
     StoryStore.saveSession()
     UpdatesStore.saveSession()
-  },
+  };
 
-  toggleSettings(e) {
+  toggleSettings = (e) => {
     e.preventDefault()
     this.setState({showSettings: !this.state.showSettings})
-  },
+  };
 
   render() {
     return <div className="App" onClick={this.state.showSettings && this.toggleSettings}>
@@ -74,6 +72,6 @@ var App = React.createClass({
       </div>
     </div>
   }
-})
+}
 
 module.exports = App

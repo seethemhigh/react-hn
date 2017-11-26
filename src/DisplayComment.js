@@ -1,5 +1,7 @@
 var React = require('react')
 
+var createReactClass = require('create-react-class');
+
 var SettingsStore = require('./stores/SettingsStore')
 
 var CommentMixin = require('./mixins/CommentMixin')
@@ -9,7 +11,8 @@ var cx = require('./utils/buildClassName')
 /**
  * Displays a standalone comment passed as a prop.
  */
-var DisplayComment = React.createClass({
+var DisplayComment = createReactClass({
+  displayName: 'DisplayComment',
   mixins: [CommentMixin],
 
   propTypes: {
@@ -46,7 +49,7 @@ var DisplayComment = React.createClass({
         {this.renderCommentText(comment, {replyLink: false})}
       </div>
     </div>
-  }
+  },
 })
 
 module.exports = DisplayComment
